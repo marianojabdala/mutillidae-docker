@@ -22,7 +22,8 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=1.1.$CIRCLE_BUILD_NUM
-          docker build -t  pentestlab/mutillidae:$TAG .
+          docker build -t pentestlab/mutillidae:$TAG .
+          docker build -t pentestlab/mutillidae:latest .
           docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
           docker push pentestlab/mutillidae:$TAG
           docker push pentestlab/mutillidae:latest
