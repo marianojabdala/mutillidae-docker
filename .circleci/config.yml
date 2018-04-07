@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:   # (2)
-          docker_layer_caching: true # (3)
+          d: true # (3)
 
       # use a primary image that already has Docker (recommended)
       # or install it during a build like we do here
@@ -23,5 +23,6 @@ jobs:
       - run: |
           TAG=1.1.$CIRCLE_BUILD_NUM
           docker build -t  pentestlab/mutillidae:$TAG .
-          docker login -u $DOCKER_USER --password-stdin $DOCKER_PASS
+          docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
           docker push pentestlab/mutillidae:$TAG
+          docker push pentestlab/mutillidae:latest
